@@ -1,0 +1,108 @@
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #ff4e50, #f9d423);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  text-align: center;
+  background: rgba(30, 30, 47, 0.95);
+  padding: 50px 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+  width: 360px;
+  position: relative; /* ensures pseudo-element is relative to container */
+  overflow: hidden;
+}
+
+h1 {
+  margin-bottom: 30px;
+  font-size: 32px;
+  color: #fff;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+}
+
+#timer {
+  font-size: 60px;
+  margin: 25px 0;
+  color: #fff;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+  transition: color 0.3s ease;
+  position: relative; /* needed for pseudo-element positioning */
+}
+
+/* Countdown circle animation (behind the timer) */
+#timer::after {
+  content: '';
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  border: 8px solid rgba(255, 255, 255, 0.2);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 2s infinite;
+  pointer-events: none; /* fixes button clicks */
+  z-index: -1;          /* behind the timer text */
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.buttons button {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  color: white;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Button colors */
+#start { background: #4CAF50; }
+#pause { background: #f39c12; }
+#reset { background: #e74c3c; }
+
+/* Hover animation */
+.buttons button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  opacity: 0.95;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .container {
+    width: 90%;
+    padding: 40px 20px;
+  }
+
+  #timer {
+    font-size: 50px;
+  }
+}
